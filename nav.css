@@ -1,0 +1,162 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+body{
+    overflow-x: hidden;
+}
+
+@media only screen and (min-width: 767px) {
+    
+nav{
+    width: 100%;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e89002;
+
+}
+
+nav>.nav-links>ul{
+    display: flex;
+    gap: 20px;
+}
+nav ul li {
+    padding: 10px 10px;
+    border-radius: 25px;
+    font-size: medium;
+    font-weight: bold;
+
+}
+nav>.nav-links>ul a{
+    color:#fff;
+    display: inline-block;
+    position: relative;
+}
+nav>.nav-links>ul a.lgbtn{
+    display: none;
+}
+nav ul li a::after{
+    
+    content: "";
+    position: absolute;
+    width: 105%;
+    transform: scalex(0);
+    height: 3px;
+    background-color: whitesmoke;
+    bottom: -16%;
+    left: 0%;
+    border-radius: 25px;
+    transform-origin: bottom right;
+    transition: 0.3s ease-in;
+}
+nav ul li a:hover::after{
+
+    transform: scaley(1);
+    
+    
+}
+.nav-lg{
+    background-color: #e89002;
+    display: none;
+}
+
+
+.btn{
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: rgba(0, 136, 169, 1);
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+}
+.btn:hover{
+    background-color: black;
+    color: rgb(0, 218, 196);
+}
+.actives::after{
+    background-color: white;
+    transform: scaleY(1);    
+    width: 8px;
+    left: 50%;    
+}
+.menu{
+    display: none;
+}
+.close{
+    display: none;
+}
+
+
+}
+
+
+@media only screen and (max-width: 767px) {
+    
+    nav{
+        background-color: #e89002;
+        padding: 10px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo{
+        order: 1;
+    }
+    .menu{
+        display: block;
+        order: 2;
+        size: 20px;
+    }
+    .menu span{
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .nav-links{
+        
+        order: 3;
+        position: absolute;
+        background-color: #e89002;
+        color: #fff;
+        width: 50%;
+        height: 100vh;
+        top: 0%; 
+        right: -50%;
+        opacity: 0;
+    }
+    
+    
+    .close{
+        position: absolute;
+        top: 5%;
+        right: 40%;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 50%;
+        font-weight: bolder;
+    }
+    .nav-links ul{
+        display: inline;
+        padding: auto;
+        margin-top: 5%;
+        
+    }
+    .nav-links ul a{
+        color: #fff;
+        font-weight: bold;
+        
+    }
+    .nav-links ul li{
+        margin: 50px 25px;
+    }
+    .btn{
+        display: none;
+    }
+  }
