@@ -130,7 +130,7 @@
             
         <?php
             if (isset($_GET['category']) && $_GET['category'] == "success") {
-                echo '<script> alert("Category Successfully Added")</script>';
+                echo '<script> </script>';
             }else if (isset($_GET['category']) && $_GET['category'] == "error") {
                 echo '<script> alert("Adding Unsuccess")</script>';
             }
