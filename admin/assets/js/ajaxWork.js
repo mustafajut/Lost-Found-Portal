@@ -289,7 +289,7 @@ function categoryDelete(id){
         method:"post",
         data:{record:id},
         success:function(data){
-            alert('Category Successfully deleted');
+            alert(data);
             $('form').trigger('reset');
             showCategory();
         }
