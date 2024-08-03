@@ -11,7 +11,6 @@ body{
 }
 
 @media only screen and (min-width: 767px) {
-    
 nav{
     width: 100%;
     padding: 10px 50px;
@@ -37,9 +36,6 @@ nav>.nav-links>ul a{
     color:#fff;
     display: inline-block;
     position: relative;
-}
-nav>.nav-links>ul a.lgbtn{
-    display: none;
 }
 nav ul li a::after{
     
@@ -96,9 +92,7 @@ nav ul li a:hover::after{
 
 }
 
-
 @media only screen and (max-width: 767px) {
-    
     nav{
         background-color: #e89002;
         padding: 10px 25px;
@@ -156,7 +150,7 @@ nav ul li a:hover::after{
     .nav-links ul li{
         margin: 50px 25px;
     }
-    .btn{
+    .nav-lg.btn{
         display: none;
     }
   }

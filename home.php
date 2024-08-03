@@ -22,7 +22,7 @@ include("php/config.php");
   include 'nav.php';
   ?>
   <div class="page-1">
-    <!-- <h4>Your Trusted Lost and Found Solution</h4> -->
+    <h4>Your Trusted Lost and Found Solution</h4>
     <div class="btn-container">
       <a href="Reportlost.php"><button class="btn">Report Lost</button></a>
       <a href="Reportfound.php"><button class="btn">Report Found</button></a>
@@ -55,8 +55,7 @@ include("php/config.php");
 
   <div id="about">
     <h1>About Us</h1>
-    <p style="    margin-left: 5px;
-    margin-right: 9px;">
+    <p>
       Your go-to platform for managing lost items efficiently and reuniting
       them with their rightful owners. Our mission is to provide a
       user-friendly interface where individuals can report lost items, search
@@ -64,8 +63,7 @@ include("php/config.php");
       process.
     </p>
     <br />
-    <p style="    margin-left: 5px;
-    margin-right: 9px;">
+    <p>
       At Lost and Found Portal, we understand the frustration and
       inconvenience that comes with losing valuable belongings. That's why
       we've created a centralized hub where users can report lost items with
@@ -74,8 +72,7 @@ include("php/config.php");
       through found items and filter results based on various criteria.
     </p>
     <br />
-    <p style="    margin-left: 5px;
-    margin-right: 9px;">
+    <p>
       We believe in the power of community and collaboration when it comes to
       reuniting lost items with their owners. Our platform encourages users to
       communicate and coordinate efforts to ensure a successful return.

@@ -31,7 +31,6 @@ include("php/config.php");
                 <li><a href="testlostcard.php">Lost</a></li>
                 <li><a href="Foundpagecard.php">Found</a></li>
                 <li><a href="contact.php">Contact US</a></li>
-                <li><a href="index.php" class="lgbtn">Login</a></li>
 
                 <!-- <p class="close">X</p> -->
                 <span class="close"><img src="close.png" alt="X"></span>
@@ -51,7 +50,7 @@ include("php/config.php");
                 $res_Phone = $result['Phone'];
                 $res_id = $result['Id'];
             }
-            echo '<a class="edit" href="edit.php"><img src="avatar.png" alt="Profile" style="width:40px; border-radius:50%; margin-right: -70px;"></a>';
+            echo '<a class="btn1" href="edit.php">Edit</a>';
             echo '<a class="btn" href="php/logout.php">Logout</a>';
         } else {
             echo '<a class="btn" href="index.php">Login</a>';

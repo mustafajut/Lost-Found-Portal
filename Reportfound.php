@@ -13,7 +13,7 @@ include("php/config.php");
 </head>
 
 <body>
-    <?php require 'nav.php'; ?>
+<?php require 'nav.php'; ?>
     <div class="container" style="margin-top: 100px;">
         <div class="box form-box">
 
@@ -59,75 +59,62 @@ include("php/config.php");
                 }
             } else {
             ?>
-            <header>Report Found</header>
-            <form action="" method="post" autocomplete="off">
-                <div class="field input">
-                    <label for="fitemName">Item Name</label>
-                    <input type="text" id="fitemName" name="fitemName" placeholder="Enter Item name.." required>
-                    <span class="formerror"></span>
-                </div>
-
-                <div class="field input">
-                    <label for="category">Category</label>
-                    <select id="category" name="fiCategory" required style="    height: 60px;
-    width: 100%;
-    font-size: 1.3rem;
-    padding: 0 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
-    color: gray;">
-                        <option value="">Select Category</option>
-                        <?php foreach ($categories as $category) { ?>
-                        <option value="<?php echo $category; ?>"><?php echo $category; ?></option>
-                        <?php } ?>
-                    </select>
-                    <span class="formerror"></span>
-                </div>
-
-                <div class="field input">
-                    <label for="FDate" required>Found Date</label>
-                    <input type="date" id="FDate" name="FDate" required>
-                </div>
-
-                <div class="field input">
-                    <label for="fLocation">Found Location</label>
-                    <input type="text" id="fLocation" name="fLocation" placeholder="Enter Found Location.." required
-                        maxlength="12">
-                </div>
-
-                <br>
-                <div class="field input">
-                    <label for="fTime">Found Time</label>
-                    <div style="display: inline-flex; align-items: center;">
-                        <input type="radio" id="fmorning" name="fTime" value="Morning" checked required
-                            style="transform: scale(0.5); margin-right: 5px;">
-                        <label for="fmorning" style="transform: scale(0.8); margin-right: 15px;">Morning</label>
-                        <input type="radio" id="fafternoon" name="fTime" value="Afternoon"
-                            style="transform: scale(0.5); margin-right: 5px;">
-                        <label for="fafternoon" style="transform: scale(0.8); margin-right: 15px;">Afternoon</label>
-                        <input type="radio" id="fevening" name="fTime" value="Evening"
-                            style="transform: scale(0.5); margin-right:5px;">
-                        <label for="fevening" style="transform: scale(0.8); margin-right: 5px;">Evening</label>
+                <header>Report Found</header>
+                <form action="" method="post" autocomplete="off">
+                    <div class="field input">
+                        <label for="fitemName">Item Name</label>
+                        <input type="text" id="fitemName" name="fitemName" placeholder="Enter Item name.." required>
+                        <span class="formerror"></span>
                     </div>
-                </div>
-                <br>
 
-                <div class="field input">
-                    <label for="fItemDescription">Item Description</label>
-                    <textarea id="fItemDescription" name="fItemDescription"
-                        placeholder="Write Brief Detail about item.." style="height:200px" required></textarea>
-                </div>
-                <div class="field input">
-                    <label for="phone">Contact Information</label>
-                    <input type="tel" id="phone" name="Contact" placeholder="0300-0000000" required maxlength="12"
-                        pattern="[0-9]{4}-[0-9]{7}">
-                </div>
+                    <div class="field input">
+                        <label for="category">Category</label>
+                        <select id="category" name="fiCategory" required>
+                            <option value="">Select Category</option>
+                            <?php foreach ($categories as $category) { ?>
+                                <option value="<?php echo $category; ?>"><?php echo $category; ?></option>
+                            <?php } ?>
+                        </select>
+                        <span class="formerror"></span>
+                    </div>
 
-                <div class="field">
-                    <input type="submit" class="form-btn" name="submit" value="Submit" required>
-                </div>
-            </form>
+                    <div class="field input">
+                        <label for="FDate" required>Found Date</label>
+                        <input type="date" id="FDate" name="FDate" required>
+                    </div>
+                    
+                    <div class="field input">
+                        <label for="fLocation">Found Location</label>
+                        <input type="text" id="fLocation" name="fLocation" placeholder="Enter Found Location.." required maxlength="12">
+                    </div>
+
+                    <br>
+                    <div class="field input">
+                        <label for="fTime">Found Time</label>
+                        <div style="display: inline-flex; align-items: center;">
+                            <input type="radio" id="fmorning" name="fTime" value="Morning" checked required style="transform: scale(0.5); margin-right: 5px;">
+                            <label for="fmorning" style="transform: scale(0.8); margin-right: 15px;">Morning</label>
+                            <input type="radio" id="fafternoon" name="fTime" value="Afternoon" style="transform: scale(0.5); margin-right: 5px;">
+                            <label for="fafternoon" style="transform: scale(0.8); margin-right: 15px;">Afternoon</label>
+                            <input type="radio" id="fevening" name="fTime" value="Evening" style="transform: scale(0.5); margin-right:5px;">
+                            <label for="fevening" style="transform: scale(0.8); margin-right: 5px;">Evening</label>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="field input">
+                        <label for="fItemDescription">Item Description</label>
+                        <textarea id="fItemDescription" name="fItemDescription" placeholder="Write Brief Detail about item.." style="height:200px" required></textarea>
+                    </div>
+                    <div class="field input">
+                        <label for="phone">Contact Information</label>
+                        <input type="tel" id="phone" name="Contact" placeholder="0300-0000000" required maxlength="12" pattern="[0-9]{4}-[0-9]{7}">
+                    </div>
+
+                    <div class="field">
+                        <input type="submit" class="form-btn" name="submit" value="Submit" required>
+                    </div>
+                </form>
         </div>
         <?php
             } ?>

@@ -1,0 +1,501 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+body{
+    background: #e4e9f7;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+/* home styling */
+.page-1 {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.page-1 h4 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.5);
+   /* Optional: Adds a semi-transparent background for better readability */
+  padding: 10px;
+
+}
+.page-1 .btn-container {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 10px; /* Adds space between buttons */
+}
+.page-1 .btn {
+  background-color: rgb(0, 0, 0); /* Optional: Adds a semi-transparent background for better readability */
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.page-1 img {
+  width: 100%;
+  height: 30%;
+}
+
+/* home styling end */
+
+.box{
+    background: #fdfdfd;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+                0 32px 64px -48px rgba(0,0,0,0.5);
+}
+.form-box{
+    width: 900px;
+    margin: 0px 10px;
+}
+.form-box header{
+    font-size: 2.2rem;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 10px;
+}
+.form-box form .field{
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+    font-size: 1.5rem;
+    font-weight:500;
+
+}
+.form-box form .input input{
+    height: 60px;
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.form-btn{
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(0, 136, 169, 1);
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  width: 120px;
+  text-align: center;
+}
+.form-btn:hover{
+  background-color: black;
+  color: rgb(0, 218, 196);
+}
+.submit{
+    width: 100%;
+}
+.links{
+    margin-bottom: 15px;
+}
+
+/********* Home *****************/
+
+.nav {
+    background-color: #e89002;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+}
+
+.nav h2 {
+    font-family: calibri;
+    color: white;
+}
+
+.nav a {
+    text-decoration: none;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.nav ul a {
+    margin-left: 20px;
+    font-family: calibri;
+    font-size: 25px;
+    font-weight: 600;
+    color: white;
+}
+.logo{
+    font-size: 25px;
+    font-weight: 900;
+    
+}
+.logo a{
+    text-decoration: none;
+    color: #000;
+    font-size: x-large;
+}
+.right-links a{
+    padding: 0 10px;
+}
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+}
+.main-box{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+.main-box .top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.bottom{
+    width: 100%;
+    margin-top: 20px;
+}
+#contact {
+    margin-bottom: 130px;
+    background-color: #e89002;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-around;
+    /* Adjust padding to add spacing */
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    line-height: 0.5;
+  }
+
+  .mian {
+    margin-top: 140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .intro {
+    margin-left: 55px;
+    margin-right: 40px;
+  }
+
+  h1 {
+    color: #e89002;
+    font-family: calibri;
+    font-size: 3rem;
+  }
+  h4 {
+    color: #000000;
+    font-family: calibri;
+    font-size: 40px;
+  }
+  p {
+    color: black;
+    text-align: justify;
+    font-family: calibri;
+    font-size: 30px;
+  }
+
+  .lost {
+    margin-top: 20px;
+    margin-right: 60px;
+    height: 60vh;
+  }
+  #about {
+    padding-top: 120px;
+    padding-bottom: 20px;
+  }
+
+  #about h1 {
+    text-align: center;
+  }
+
+  #about p {
+    width: 80vw;
+    /* margin: 0 300px; */
+    text-align: justify;
+    margin-left: 10vw;
+  }
+
+  #contact {
+
+    background-color: #e89002;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-around;
+    /* Adjust padding to add spacing */
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    line-height: 0.5;
+    margin-bottom: 0;
+  }
+
+
+/* Cards styling */
+
+
+
+/* cards styling end */
+@media only screen and (max-width:840px){
+    .main-box .top{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .top .box{
+        margin: 10px 10px;
+    }
+    .bottom{
+        margin-top: 0;
+    }
+    .nav {
+        background-color: #e89002;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        height: 180px;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+    }
+.message{
+    text-align: center;
+    background: #f9eded;
+    padding: 15px 0px;
+    border:1px solid #699053;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: red;
+}
+#contact {
+
+    background-color: #e89002;
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* Adjust padding to add spacing */
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+}
+
+/* footer & contact styling */
+/* contact form section  */
+#form-1 {
+    background-color: #1e1e1e;
+    margin-top: 9rem;
+  
+  }
+  
+  
+  .formsec2 {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    width: 65vw;
+    margin: auto;
+  }
+  
+  .formsec2 h1 {
+    margin-top: 3rem;
+    color: white;
+    text-align: start;
+  
+  }
+  
+  .formsec2 p {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-align: start;
+  }
+  
+  .f1 {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+  
+  }
+  
+  .f1 input {
+    background-color: transparent;
+    /* width: 16rem; */
+    width: 33%;
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 4px;
+    color: white;
+    margin: 4px;
+  
+  }
+  
+  .f2 {
+    /* width: 51.8rem; */
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .f2 textarea {
+    border: 1px solid white;
+    width: 100%;
+    color: white;
+    background-color: transparent;
+    border-radius: 4px;
+    height: 5rem;
+    margin: 4px;
+    padding-left: 6px;
+    /* transition: all 0.2s linear; */
+  
+  }
+  
+  .formsec2 div {
+    display: flex;
+    justify-content: flex-start;
+    margin: 4px 0px 0px 3px;
+    min-width: 40rem;
+    width: 90%;
+  }
+  
+  .formsec2 button {
+    background-color: #f06922;
+    color: white;
+    padding: 2px;
+    height: 2rem;
+    width: 20rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 1s ease-in-out;
+  }
+  
+  .formsec2 button:hover {
+    background-color: black;
+  }
+  
+  /* footer styling starts from here */
+  @media screen and (min-width: 768px){
+  #last-sec {
+    height: 100%;
+    background-color: #1e1e1e;
+    overflow: hidden;
+  }
+  
+  #footer {
+    height: 100%;
+    width: 75vw;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 21px 1px;
+  }
+  
+  #footer>div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 27px 1px;
+  }
+  
+  #footer p {
+    color:floralwhite;
+    margin-top: 1.5rem;
+    font-size: 1.5em;
+  }
+  
+  .last-contacts {
+    display: flex;
+    /* height: 100%; */
+    margin: 40px 1px;
+    /* cursor: pointer; */
+  }
+  
+  .last-contacts div {
+    color:antiquewhite;
+    margin: 0.9rem 2rem 0rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .last-contacts ion-icon {
+    font-size: 4rem;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+  
+  }
+  
+  .last-contacts ion-icon:hover {
+    background-color: #f06922;
+    border-radius: 100%;
+  }
+  
+  
+  .rights {
+    color: white;
+    font-size: 15px;
+    text-align: end;
+  }
+}
+  /* Media Queries for Small Screens (e.g., Mobile Devices) */
+@media screen and (max-width: 768px) {
+  #footer {
+      width: 100%; /* Full width for small screens */
+  }
+
+  #footer>div:first-of-type {
+      padding: 0; /* Remove padding for small screens */
+  }
+
+  #footer p {
+      font-size: 1em; /* Further reduce font size for small screens */
+  }
+
+  .last-contacts div {
+      margin: 0.5rem 0.5rem; /* Adjusted margin for smaller screens */
+  }
+
+  .last-contacts ion-icon {
+      font-size: 2rem; /* Further reduce icon size for small screens */
+  }
+
+  .rights {
+      font-size: 10px; /* Further reduce font size for small screens */
+  }
+}
+  
+  

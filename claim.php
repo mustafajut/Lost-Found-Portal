@@ -40,13 +40,13 @@ if (!isset($_SESSION['valid'])) {
             echo "<div class='message'>
                       <p>Form Submitted successfully!</p>
                   </div> <br>";
-            echo "<a href='home.php'><button class='btn'>Go to Home page </button></a>";
+            echo "<a href='testlostcard.php'><button class='btn'>Go to lost page </button></a>";
          
 
          }
         else {
             ?>
-            <header>Claim Item</header>
+            <h2>Claim Item</h2>
 
             <div class="container" style="margin-top: 80px;">
                 <div class="box form-box">
@@ -57,8 +57,7 @@ if (!isset($_SESSION['valid'])) {
                         </div>
                         <div class="field input">
                             <label for="ccontact">Contact Information</label>
-                            <input type="tel" id="ccontact" name="ccontact" placeholder="Enter Your Contact Number.."
-                                required>
+                            <input type="tel" id="ccontact" name="ccontact" placeholder="Enter Your Contact Number.." required>
                         </div>
                         <div class="field input">
                             <label for="lname">Item Name</label>
@@ -70,14 +69,11 @@ if (!isset($_SESSION['valid'])) {
                         </div>
                         <div class="field input">
                             <label for="llocation">Location</label>
-                            <input type="text" id="llocation" name="lostitemlocation" placeholder="Enter Location.."
-                                required>
+                            <input type="text" id="llocation" name="lostitemlocation" placeholder="Enter Location.." required>
                         </div>
                         <div class="field input">
                             <label for="ldescription">Item Description</label>
-                            <textarea id="ldescription" name="lostitemdesc"
-                                placeholder="Write Brief Description of Item.." style="height:200px"
-                                required></textarea>
+                            <textarea id="ldescription" name="lostitemdesc" placeholder="Write Brief Description of Item.." style="height:200px" required></textarea>
                         </div>
                         <div class="field input">
                             <label for="limage">Proof Image</label>
@@ -85,9 +81,7 @@ if (!isset($_SESSION['valid'])) {
                         </div>
                         <div class="field input">
                             <label for="additionalinfo">Additional Information</label>
-                            <textarea id="additionalinfo" name="additioninfo"
-                                placeholder="Any additional information you'd like to provide.."
-                                style="height:200px"></textarea>
+                            <textarea id="additionalinfo" name="additioninfo" placeholder="Any additional information you'd like to provide.." style="height:200px"></textarea>
                         </div>
                         <div>
                             <input type="submit" class="btn" name="submit" value="Claim">
@@ -95,8 +89,8 @@ if (!isset($_SESSION['valid'])) {
                     </form>
                 </div>
             </div>
-            <?php }?>
-        </div>
+        <?php }?>
+    </div>
 </body>
 
 </html>

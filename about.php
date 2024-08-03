@@ -11,9 +11,142 @@
       margin: 0;
       padding: 0;
     }
-</style>
+    .site-footer {
+      background-color: #002379;
+      padding: 45px 0 20px;
+      font-size: 15px;
+      line-height: 24px;
+      color: #fff;
+    }
+    .site-footer hr {
+      border-top-color: #bbb;
+      opacity: 0.5;
+    }
+    .site-footer hr.small {
+      margin: 20px 0;
+    }
+    .site-footer h6 {
+      color: #FEB941;
+      font-size: 16px;
+      text-transform: uppercase;
+      margin-top: 5px;
+      letter-spacing: 2px;
+    }
+    .site-footer a {
+      color: #fff;
+    }
+    .site-footer a:hover {
+      color: #FEB941;
+      text-decoration: none;
+    }
+    .footer-links {
+      padding-left: 0;
+      list-style: none;
+    }
+    .footer-links li {
+      display: block;
+    }
+    .footer-links a {
+      color: #fff;
+    }
+    .footer-links a:active,
+    .footer-links a:focus,
+    .footer-links a:hover {
+      color: #FEB941;
+      text-decoration: none;
+    }
+    .footer-links.inline li {
+      display: inline-block;
+    }
+    .site-footer .social-icons {
+      text-align: right;
+    }
+    .site-footer .social-icons a {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      margin-left: 6px;
+      margin-right: 0;
+      border-radius: 100%;
+      background-color: #6DC5D1;
+    }
+    .copyright-text {
+      margin: 0;
+    }
+    @media (max-width: 991px) {
+      .site-footer [class^="col-"] {
+        margin-bottom: 30px;
+      }
+    }
+    @media (max-width: 767px) {
+      .site-footer {
+        padding-bottom: 0;
+      }
+      .site-footer .copyright-text,
+      .site-footer .social-icons {
+        text-align: center;
+      }
+    }
+    .social-icons {
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+    }
+    .social-icons li {
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .social-icons li.title {
+      margin-right: 15px;
+      text-transform: uppercase;
+      color: #96a2b2;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .social-icons a {
+      background-color: #eceeef;
+      color: #ffff;
+      font-size: 16px;
+      display: inline-block;
+      line-height: 44px;
+      width: 44px;
+      height: 44px;
+      text-align: center;
+      margin-right: 8px;
+      border-radius: 100%;
+      transition: all 0.2s linear;
+    }
+    .social-icons a:active,
+    .social-icons a:focus,
+    .social-icons a:hover {
+      color: #fff;
+      background-color: #29aafe;
+    }
+    .social-icons.size-sm a {
+      line-height: 34px;
+      height: 34px;
+      width: 34px;
+      font-size: 14px;
+    }
+    .social-icons a.facebook:hover {
+      background-color: #3b5998;
+    }
+    .social-icons a.whatsapp:hover {
+      background-color: #33f933;
+    }
+    .social-icons a.linkedin:hover {
+      background-color: #007bb6;
+    
+    }
+    @media (max-width: 767px) {
+      .social-icons li.title {
+        display: block;
+        margin-right: 0;
+        font-weight: 600;
+      }
+    }
+  </style>
 <body>
-
 <?php
     include 'nav.php';
     ?>
@@ -46,6 +179,61 @@
     </p>
     <br />
   </div>
+
+  <!-- footer -->
+  <!-- <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <h6>About</h6>
+          <p class="text-justify">Lost & Found is an initiative to help users report their belonging items. Lost & Found focuses on providing the most efficient and user-friendly platform for everyone. We will help people to report and find their items.</p>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+          <h6>Categories</h6>
+          <ul class="footer-links">
+            <li>Bags</li>
+            <li>Books</li>
+            <li>Stationery</li>
+            <li>Watch</li>
+            <li>Mobile</li>
+            <li>Earpods</li>
+            <li>Others</li>
+          </ul>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+          <h6>Quick Links</h6>
+          <ul class="footer-links">
+            <li><a href="home.php">Home</a></li>
+            <li><a href="about.php">About Us</a></li>
+            <li><a href="reportlost.php">Report Lost</a></li>
+            <li><a href="reportfound.php">Report Found</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">Copyright &copy; 2024 All Rights Reserved by 
+            <a href="#">L&F</a>.
+          </p>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <ul class="social-icons">
+            <li class="title">Follow Us</li>
+            <li><a class="whatsapp" href="#"><i class="fa fa-whatsapp"></i></a></li>
+            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer> -->
   <?php
     include 'footer.php';
     ?>

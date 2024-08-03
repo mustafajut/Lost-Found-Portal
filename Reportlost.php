@@ -83,14 +83,7 @@ include("php/config.php");
 
                     <div class="field input">
                         <label for="category">Category</label>
-                        <select id="category" name="category_name" required style="    height: 60px;
-    width: 100%;
-    font-size: 1.3rem;
-    padding: 0 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
-    color: gray;">
+                        <select id="category" name="category_name" required>
                             <option value="">Select Category</option>
                             <?php foreach ($categories as $category) { ?>
                                 <option value="<?php echo $category; ?>"><?php echo $category; ?></option>
@@ -122,7 +115,7 @@ include("php/config.php");
                     <br>
                     <div class="field input">
                         <label for="lItemDescription">Item Description</label>
-                        <textarea id="lItemDescription" name="lItemDescription" placeholder="Write Brief Detail about item.." style="height:200px" required ></textarea>
+                        <textarea id="lItemDescription" name="lItemDescription" placeholder="Write Brief Detail about item.." style="height:200px" required></textarea>
                     </div>
                     <div class="field input">
                         <label for="phone">Contact Information</label>
