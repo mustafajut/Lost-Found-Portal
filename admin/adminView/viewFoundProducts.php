@@ -37,7 +37,7 @@
       <td><?=$row["fTime"]?></td>
       <td><?=$row["fItemDescription"]?></td>
       <td><?=$row["Contact"]?></td>    
-      <td><button class="btn btn-primary" style="height:40px" onclick="fitemEditForm('<?=$row['fitemId']?>')">Edit</button></td>
+      <td><button class="btn btn-primary" style="height:40px" onclick="showUpdateFoundProductModal('<?=$row['fitemId']?>', '<?=addslashes($row['fitemName'])?>', '<?=addslashes($row['category_name'])?>', '<?=addslashes($row['FDate'])?>', '<?=$row['fLocation']?>', '<?=addslashes($row['fTime'])?>', '<?=addslashes($row['fItemDescription'])?>', '<?=addslashes($row['Contact'])?>')">Edit</button></td>
       <td><button class="btn btn-danger" style="height:40px" onclick="fitemDelete('<?=$row['fitemId']?>')">Delete</button></td>
     </tr>
     <?php
@@ -118,4 +118,147 @@
 
   
 </div>
-   
+
+<!-- Modal -->
+<div class="modal fade" id="updateFoundProductModal" tabindex="-1" aria-labelledby="updateFoundProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateFoundProductModalLabel">Update Found Product</h5>
+      </div>
+      <div class="modal-body">
+        <form id="update-FoundProduct" enctype='multipart/form-data'>
+          <!-- Add a hidden input field to pass the record ID -->
+          <div class="form-group">
+            <input type="text" class="form-control" id="fitemId" hidden>
+          </div>
+          <div class="form-group">
+            <label for="fitemName">Item Name</label>
+            <input type="text" class="form-control" id="fitemName">
+          </div>
+          <div class="form-group">
+            <label for="category_name">Category</label>
+            <input type="text" class="form-control" id="category_name">
+          </div>
+          <div class="form-group">
+            <label for="FDate">Date</label>
+            <input type="text" class="form-control" id="FDate">
+          </div>
+          <div class="form-group">
+            <label for="fLocation">Location</label>
+            <input type="text" class="form-control" id="fLocation">
+          </div>
+          <div class="form-group">
+            <label for="fTime">Time</label>
+            <input type="text" class="form-control" id="fTime">
+          </div>
+          <div class="form-group">
+            <label for="fItemDescription">Description</label>
+            <input type="text" class="form-control" id="fItemDescription">
+          </div>
+          <div class="form-group">
+            <label for="Contact">Contact</label>
+            <input type="text" class="form-control" id="Contact">
+          </div>
+          <div class="form-group">
+            <button type="submit" style="height:40px" class="btn btn-primary">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- JavaScript to handle the modal display and populate form fields -->
+<script>
+ function showUpdateFoundProductModal(id, name, category, date, location, time, description, contact) {
+    document.getElementById('fitemId').value = id;
+    document.getElementById('fitemName').value = name;
+    document.getElementById('category_name').value = category;
+    document.getElementById('FDate').value = date;
+    document.getElementById('fLocation').value = location;
+    document.getElementById('fTime').value = time;
+    document.getElementById('fItemDescription').value = description;
+    document.getElementById('Contact').value = contact;
+
+    var updateFoundProductModal = new bootstrap.Modal(document.getElementById('updateFoundProductModal'), {
+        keyboard: false
+    });
+    updateFoundProductModal.show();
+}
+
+
+  // Ensure the DOM is fully loaded
+$(document).ready(function() {
+  // Handle form submission with AJAX
+  $("#update-FoundProduct").on("submit", function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Gather form data using getElementById
+    var fitemId = document.getElementById('fitemId').value;
+    var fitemName = document.getElementById('fitemName').value;
+    var category_name = document.getElementById('category_name').value;
+    var FDate = document.getElementById('FDate').value;
+    var fLocation = document.getElementById('fLocation').value;
+    var fTime = document.getElementById('fTime').value;
+    var fItemDescription = document.getElementById('fItemDescription').value;
+    var Contact = document.getElementById('Contact').value;
+
+    // Log form data key-value pairs
+    console.log('fitemId: ' + fitemId);
+    console.log('fitemName: ' + fitemName);
+    console.log('category_name: ' + category_name);
+    console.log('FDate: ' + FDate);
+    console.log('fLocation: ' + fLocation);
+    console.log('fTime: ' + fTime);
+    console.log('fItemDescription: ' + fItemDescription);
+    console.log('Contact: ' + Contact);
+    console.log("Form data logged successfully.");
+
+    // Create a FormData object to send
+    var formData = new FormData();
+    formData.append('fitemId', fitemId);
+    formData.append('fitemName', fitemName);
+    formData.append('category_name', category_name);
+    formData.append('FDate', FDate);
+    formData.append('fLocation', fLocation);
+    formData.append('fTime', fTime);
+    formData.append('fItemDescription', fItemDescription);
+    formData.append('Contact', Contact);
+
+    // Log form data key-value pairs
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+
+    console.log("Form data logged successfully.");
+
+    // Send AJAX request
+    $.ajax({
+      url:'./controller/updateItemController.php',
+      type: 'POST',
+      data: formData,
+      contentType: false, // Important for sending FormData
+      processData: false, // Important for sending FormData
+      success: function(response) {
+        // Handle success
+        if (response === "true") {
+          alert("Found product updated successfully!");
+          // Optionally hide the modal
+          $('#updateFoundProductModal').modal('hide');
+          // Optionally refresh the page or update the UI
+        } else {
+          alert("Error: " + response);
+        }
+      },
+      error: function(xhr, status, error) {
+        // Handle error
+        alert("An error occurred: " + error);
+      }
+    });
+  });
+});
+
+</script>
