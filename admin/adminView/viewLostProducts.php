@@ -151,8 +151,15 @@
             <input type="text" class="form-control" id="fLocation">
           </div>
           <div class="form-group">
-            <label for="fTime">Time</label>
-            <input type="time" class="form-control" id="fTime">
+            <label for="fTime">Lost Time</label> <br>
+            <div style="display: inline-flex; align-items: center;">
+                <input type="radio" id="fmorning" name="lTime" value="Morning" checked required style="transform: scale(0.5); margin-right: 5px;">
+                <label for="fmorning" style="transform: scale(0.8); margin-right: 15px;">Morning</label>
+                <input type="radio" id="fafternoon" name="lTime" value="Afternoon" style="transform: scale(0.5); margin-right: 5px;">
+                <label for="fafternoon" style="transform: scale(0.8); margin-right: 15px;">Afternoon</label>
+                <input type="radio" id="fevening" name="lTime" value="Evening" style="transform: scale(0.5); margin-right:5px;">
+                <label for="fevening" style="transform: scale(0.8); margin-right: 5px;">Evening</label>
+            </div>
           </div>
           <div class="form-group">
             <label for="fItemDescription">Description</label>
@@ -179,7 +186,14 @@
     document.getElementById('category_name').value = category;
     document.getElementById('FDate').value = date;
     document.getElementById('fLocation').value = location;
-    document.getElementById('fTime').value = time;
+      // Set the radio button for time
+      if (time === 'Morning') {
+        document.getElementById('fmorning').checked = true;
+    } else if (time === 'Afternoon') {
+        document.getElementById('fafternoon').checked = true;
+    } else if (time === 'Evening') {
+        document.getElementById('fevening').checked = true;
+    }
     document.getElementById('fItemDescription').value = description;
     document.getElementById('Contact').value = contact;
 
@@ -201,7 +215,7 @@ $(document).ready(function() {
     var category_name = document.getElementById('category_name').value;
     var FDate = document.getElementById('FDate').value;
     var fLocation = document.getElementById('fLocation').value;
-    var fTime = document.getElementById('fTime').value;
+    var lTime = document.querySelector('input[name="lTime"]:checked').value;
     var fItemDescription = document.getElementById('fItemDescription').value;
     var Contact = document.getElementById('Contact').value;
 
@@ -211,7 +225,7 @@ $(document).ready(function() {
     console.log('category_name: ' + category_name);
     console.log('FDate: ' + FDate);
     console.log('fLocation: ' + fLocation);
-    console.log('fTime: ' + fTime);
+    console.log('fTime: ' + lTime);
     console.log('fItemDescription: ' + fItemDescription);
     console.log('Contact: ' + Contact);
     console.log("Form data logged successfully.");
@@ -223,7 +237,7 @@ $(document).ready(function() {
     formData.append('category_name', category_name);
     formData.append('FDate', FDate);
     formData.append('fLocation', fLocation);
-    formData.append('fTime', fTime);
+    formData.append('fTime', lTime);
     formData.append('fItemDescription', fItemDescription);
     formData.append('Contact', Contact);
 
