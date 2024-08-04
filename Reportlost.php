@@ -34,31 +34,31 @@ include("php/config.php");
                 $lLostTime = $_POST['lLostTime'];
                 $lItemDescription = $_POST['lItemDescription'];
                 $Contact = $_POST['Contact'];
-                // $categorylost = $_POST['category_name']; // Added missing semicolon here
 
                 // Validate and process the file upload
                 if (isset($_FILES["itemimage"]) && $_FILES["itemimage"]["error"] == 0) {
-                    $itemimage = $_FILES["itemimage"]["name"]; //getting the image name from client machine
-                    /* 
-                        ###Set image name with current time###
-                        $imageFileType = strtolower(pathinfo($image,PATHINFO_EXTENSION));
-                        $randomName = "IMG_" . date("his") . "." . $imageFileType; 
-                    */
-                    $tempName = $_FILES["itemimage"]["tmp_name"]; //temporary file name of the file on the server.
-                    $imageName = $itemimage; //set the the image name with current name
-                    $targetDirectory = "upload/" . $imageName; //declaring the folder in which the image will be store
-                    move_uploaded_file($tempName, $targetDirectory); //move the image in that folder
+                    $itemimage = $_FILES["itemimage"]["name"];
+                    $tempName = $_FILES["itemimage"]["tmp_name"];
+                    $imageName = $itemimage;
+                    $targetDirectory = "upload/" . $imageName;
+                    move_uploaded_file($tempName, $targetDirectory);
                 }
 
                 // Fetch categoryId based on category name
-                $categoryQuery = "SELECT category_id FROM category WHERE category_name = '$liCategory'";
-                $categoryResult = mysqli_query($con, $categoryQuery);
+                $categoryQuery = "SELECT category_id FROM category WHERE category_name = ?";
+                $stmt = mysqli_prepare($con, $categoryQuery);
+                mysqli_stmt_bind_param($stmt, 's', $liCategory);
+                mysqli_stmt_execute($stmt);
+                $categoryResult = mysqli_stmt_get_result($stmt);
+
                 if ($categoryRow = mysqli_fetch_assoc($categoryResult)) {
                     $categoryId = $categoryRow['category_id'];
 
                     // Insert data into reportlost table with the obtained categoryId
-                    $query = "INSERT INTO reportlost (litemName, LostDate, lLostLocation, lLostTime, lItemDescription, Contact, itemimage, category_name) VALUES ('$litemName', '$LostDate', '$lLostLocation', '$lLostTime', '$lItemDescription', '$Contact', '$targetDirectory', '$liCategory')";
-                    $result = mysqli_query($con, $query);
+                    $query = "INSERT INTO reportlost (litemName, LostDate, lLostLocation, lLostTime, lItemDescription, Contact, itemimage, category_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    $stmt = mysqli_prepare($con, $query);
+                    mysqli_stmt_bind_param($stmt, 'ssssssss', $litemName, $LostDate, $lLostLocation, $lLostTime, $lItemDescription, $Contact, $targetDirectory, $liCategory);
+                    $result = mysqli_stmt_execute($stmt);
 
                     if ($result) {
                         echo "<div class='message'>
@@ -82,8 +82,8 @@ include("php/config.php");
                     </div>
 
                     <div class="field input">
-                        <label for="category">Category</label>
-                        <select id="category" name="category_name" required>
+                        <label for="category" >Category</label>
+                        <select id="category" name="category_name" required style="padding: 18px; border-radius: 6px;">
                             <option value="">Select Category</option>
                             <?php foreach ($categories as $category) { ?>
                                 <option value="<?php echo $category; ?>"><?php echo $category; ?></option>

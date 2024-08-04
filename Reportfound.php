@@ -69,7 +69,7 @@ include("php/config.php");
 
                     <div class="field input">
                         <label for="category">Category</label>
-                        <select id="category" name="fiCategory" required>
+                        <select id="category" name="fiCategory" required style="padding: 18px; border-radius: 6px;">
                             <option value="">Select Category</option>
                             <?php foreach ($categories as $category) { ?>
                                 <option value="<?php echo $category; ?>"><?php echo $category; ?></option>
