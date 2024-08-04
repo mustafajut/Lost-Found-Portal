@@ -138,7 +138,19 @@
           </div>
           <div class="form-group">
             <label for="category_name">Category</label>
-            <input type="text" class="form-control" id="category_name">
+            <select class="form-control" id="category_name">
+              <option disabled selected>Select category</option>
+              <?php
+                include_once "../config/dbconnect.php";
+                $sql="SELECT * from category";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                  while($row = $result->fetch_assoc()) {
+                    echo "<option value='".$row['category_name']."'>".$row['category_name']."</option>";
+                  }
+                }
+              ?>
+            </select>
           </div>
           <div class="form-group">
             <label for="FDate">Date</label>
@@ -237,7 +249,7 @@ $(document).ready(function() {
 
     // Send AJAX request
     $.ajax({
-      url:'./controller/updateItemController.php',
+      url:'./controller/updatefoundItemController.php',
       type: 'POST',
       data: formData,
       contentType: false, // Important for sending FormData
