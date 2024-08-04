@@ -1,44 +1,30 @@
 <?php
     include_once "../config/dbconnect.php";
 
-    $litemId=$_POST['litemId'];
-    $litemName= $_POST['litemName'];
-    $lItemDescription= $_POST['lItemDescription'];
-    $Contact= $_POST['Contact'];
-    $category= $_POST['category'];
+    $fitemId = $_POST['fitemId'];
+    $fitemName = $_POST['fitemName'];
+    $category_name = $_POST['category_name'];
+    $FDate = $_POST['FDate'];
+    $fLocation = $_POST['fLocation'];
+    $fTime = $_POST['fTime'];
+    $fItemDescription = $_POST['fItemDescription'];
+    $Contact = $_POST['Contact'];
 
-    if( isset($_FILES['newImage']) ){
-        
-        $location="./uploads/";
-        $img = $_FILES['newImage']['name'];
-        $tmp = $_FILES['newImage']['tmp_name'];
-        $dir = '../uploads/';
-        $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
-        $valid_extensions = array('jpeg', 'jpg', 'png', 'gif','webp');
-        $image =rand(1000,1000000).".".$ext;
-        $final_image=$location. $image;
-        if (in_array($ext, $valid_extensions)) {
-            $path = UPLOAD_PATH . $image;
-            move_uploaded_file($tmp, $dir.$image);
-        }
-    }else{
-        $final_image=$_POST['existingImage'];
-    }
-    $updateItem = mysqli_query($conn,"UPDATE reportlost SET 
-        litemName='$litemName', 
-        lItemDescription='$lItemDescription', 
-        Contact=$Contact,
-        categoryId=$category,
-        itemimage='$final_image' 
-        WHERE litemId=$litemId");
+    
 
+    $updateItem = mysqli_query($conn, "UPDATE reportfound SET 
+        fitemName='$fitemName', 
+        category_name='$category_name', 
+        FDate='$FDate', 
+        fLocation='$fLocation', 
+        fTime='$fTime', 
+        fItemDescription='$fItemDescription', 
+        Contact='$Contact'
+        WHERE fitemId=$fitemId");
 
-    if($updateItem)
-    {
+    if ($updateItem) {
         echo "true";
+    } else {
+        echo mysqli_error($conn);
     }
-    // else
-    // {
-    //     echo mysqli_error($conn);
-    // }
 ?>
