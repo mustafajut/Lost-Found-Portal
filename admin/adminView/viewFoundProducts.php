@@ -19,7 +19,7 @@
     </thead>
     <?php
       include_once "../config/dbconnect.php";
-      $sql="SELECT * FROM reportfound INNER JOIN category ON reportfound.category_name=category.category_name";
+      $sql="SELECT * FROM reportfound";
       $result=$conn->query($sql);
       $count=1;
       
@@ -161,8 +161,15 @@
             <input type="text" class="form-control" id="fLocation">
           </div>
           <div class="form-group">
-            <label for="fTime">Time</label>
-            <input type="text" class="form-control" id="fTime">
+            <label for="fTime">Found Time</label> <br>
+            <div style="display: inline-flex; align-items: center;">
+                <input type="radio" id="fmorning" name="fTime" value="Morning" checked required style="transform: scale(0.5); margin-right: 5px;">
+                <label for="fmorning" style="transform: scale(0.8); margin-right: 15px;">Morning</label>
+                <input type="radio" id="fafternoon" name="fTime" value="Afternoon" style="transform: scale(0.5); margin-right: 5px;">
+                <label for="fafternoon" style="transform: scale(0.8); margin-right: 15px;">Afternoon</label>
+                <input type="radio" id="fevening" name="fTime" value="Evening" style="transform: scale(0.5); margin-right:5px;">
+                <label for="fevening" style="transform: scale(0.8); margin-right: 5px;">Evening</label>
+            </div>
           </div>
           <div class="form-group">
             <label for="fItemDescription">Description</label>
@@ -191,7 +198,15 @@
     document.getElementById('category_name').value = category;
     document.getElementById('FDate').value = date;
     document.getElementById('fLocation').value = location;
-    document.getElementById('fTime').value = time;
+    
+     // Set the radio button for time
+     if (time === 'Morning') {
+        document.getElementById('fmorning').checked = true;
+    } else if (time === 'Afternoon') {
+        document.getElementById('fafternoon').checked = true;
+    } else if (time === 'Evening') {
+        document.getElementById('fevening').checked = true;
+    }
     document.getElementById('fItemDescription').value = description;
     document.getElementById('Contact').value = contact;
 
@@ -214,7 +229,7 @@ $(document).ready(function() {
     var category_name = document.getElementById('category_name').value;
     var FDate = document.getElementById('FDate').value;
     var fLocation = document.getElementById('fLocation').value;
-    var fTime = document.getElementById('fTime').value;
+    var fTime = document.querySelector('input[name="fTime"]:checked').value;
     var fItemDescription = document.getElementById('fItemDescription').value;
     var Contact = document.getElementById('Contact').value;
 
