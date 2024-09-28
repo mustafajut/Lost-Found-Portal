@@ -241,10 +241,10 @@ main{
   }
 
   #about p {
-    width: 80vw;
+    width: 90vw;
     /* margin: 0 300px; */
     text-align: justify;
-    margin-left: 10vw;
+    margin-left: 4vw;
   }
 
   #contact {
