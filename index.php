@@ -31,10 +31,14 @@ $_SESSION['isLoggedIn'] = false;
                 $email = mysqli_real_escape_string($con, $_POST['email']);
                 $password = mysqli_real_escape_string($con, $_POST['password']);
 
-                $result = mysqli_query($con, "SELECT * FROM users WHERE Email='$email' AND Password='$password' ") or die("Select Error");
+                $result = mysqli_query($con, "SELECT * FROM users WHERE Email='$email'") or die("select error");
+                // --  AND Password='$password' ") or die("Select Error");
+                // $row = mysqli_fetch_assoc($result);
+
+                // if (is_array($row) && !empty($row)) {
                 $row = mysqli_fetch_assoc($result);
 
-                if (is_array($row) && !empty($row)) {
+                if ($row && password_verify($password, $row['Password'])) {
                     $_SESSION['valid'] = $row['Email'];
                     $_SESSION['username'] = $row['Username'];
                     $_SESSION['Phone'] = $row['Phone'];
