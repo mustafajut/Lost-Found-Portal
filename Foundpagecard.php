@@ -2,24 +2,41 @@
 session_start();
 // Include the database configuration file
 include("php/config.php");
+
 if (!isset($_SESSION['valid'])) {
-  header("Location: index.php");
+    header("Location: index.php");
+    exit;
 }
-else
+
 // Define the number of results per page
 $results_per_page = 6;
 
 // Get the current page number from the URL, default is 1 if not set
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
+// Check if a search term is submitted
+$search_term = "";
+if (isset($_GET['search'])) {
+    $search_term = mysqli_real_escape_string($con, $_GET['search']);
+}
+
 // Calculate the offset for the SQL query
 $start_from = ($page - 1) * $results_per_page;
 
-// Fetch data from the database with limit and offset
-$resulte = mysqli_query($con, "SELECT * FROM reportfound LIMIT $start_from, $results_per_page");
+// If search is submitted, filter the query
+if (!empty($search_term)) {
+    $query = "SELECT * FROM reportfound WHERE fitemName LIKE '%$search_term%' LIMIT $start_from, $results_per_page";
+    $total_query = "SELECT COUNT(*) AS total FROM reportfound WHERE fitemName LIKE '%$search_term%'";
+} else {
+    $query = "SELECT * FROM reportfound LIMIT $start_from, $results_per_page";
+    $total_query = "SELECT COUNT(*) AS total FROM reportfound";
+}
+
+// Fetch filtered data from the database
+$resulte = mysqli_query($con, $query);
 
 // Fetch the total number of records
-$total_results = mysqli_query($con, "SELECT COUNT(*) AS total FROM reportfound");
+$total_results = mysqli_query($con, $total_query);
 $total_rows = mysqli_fetch_assoc($total_results)['total'];
 
 // Calculate total pages
@@ -44,18 +61,12 @@ $total_pages = ceil($total_rows / $results_per_page);
             margin-top: 5%;
         }
 
-        /* Style for card container */
-        #more {
-            display: none;
-        }
-
         .card-container {
             display: grid;
             grid-template-columns: repeat(3, minmax(33%, 1fr));
             gap: 25px;
         }
 
-        /* Style for individual card */
         .card {
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -63,24 +74,20 @@ $total_pages = ceil($total_rows / $results_per_page);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Style for card image */
         .card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
 
-        /* Style for card content */
         .card-content {
             padding: 20px;
         }
 
-        /* Style for card title */
         .card-content h2 {
             margin-top: 0;
         }
 
-        /* Style for card details */
         .card-content p {
             margin: 5px 0;
         }
@@ -98,23 +105,6 @@ $total_pages = ceil($total_rows / $results_per_page);
         .btn:hover {
             background-color: black;
             color: rgb(0, 218, 196);
-        }
-
-        @media screen and (max-width: 768px) {
-            h3 {
-                color: #e89002;
-                font-family: calibri;
-                font-size: 2rem;
-                text-align: center;
-                margin-top: 5%;
-            }
-
-            .card-container {
-                margin-top: 300px;
-                display: grid;
-                grid-template-columns: repeat(1, minmax(90%, 1fr));
-                gap: 25px;
-            }
         }
 
         .pagination {
@@ -148,44 +138,55 @@ $total_pages = ceil($total_rows / $results_per_page);
 <body>
     <?php require 'nav.php'; ?>
     <h3>Found Items</h3>
-    <a href="Reportfound.php"><button class="btn" style="margin-top: 2%;">Report Found Items</button></a>
+
+
+    <a href="Reportfound.php"><button class="btn" style="margin-top: 2%;">Report Found Items</button></a>   
+     <!-- Search form -->
+    <form method="GET" action="Foundpagecard.php" style="text-align:center; margin-bottom: 20px;">
+        <input type="text" name="search" value="<?php echo $search_term; ?>" placeholder="Search Items..." style="padding: 10px 35px; border: 1px solid #ddd; border-radius: 5px;">
+        <button type="submit" class="btn">Search</button>
+    </form>
+
+
     <div class="container">
-        <!-- style="margin-top: 100px;" -->
         <div class="card-container">
             <?php
             // Loop through each row in the result set
-            while ($row = mysqli_fetch_assoc($resulte)) {
-                $id = $row['fitemId'];
+            if (mysqli_num_rows($resulte) > 0) {
+                while ($row = mysqli_fetch_assoc($resulte)) {
+                    $id = $row['fitemId'];
             ?>
-                <div class="card">
-                    <!-- <img src="<?php echo $row['fitemimage']; ?>" alt="Item Image"> -->
-                    <div class="card-content">
-                        <h2><?php echo $row['fitemName']; ?></h2>
-                        <p>Category: <?php echo $row['category_name']; ?></p>
-                        <p>Found Date: <?php echo $row['FDate']; ?></p>
-                        <p>Found Location: <?php echo $row['fLocation']; ?></p>
-                        <p>Found Time: <?php echo $row['fTime']; ?></p>
-                        <span id="dots-<?php echo $id; ?>">...</span><span id="more-<?php echo $id; ?>" style="display:none;">
-                            <p>Contact: <?php echo $row['Contact']; ?></p>
-                            <p>Description: <?php echo $row['fItemDescription']; ?></p>
-                            <a href="claim.php"><button class="btn">Claim</button></a>
-                        </span>
-                        <button onclick="myFunction(<?php echo $id; ?>)" id="myBtn-<?php echo $id; ?>" class="btn">More Details</button>
-
+                    <div class="card">
+                        <div class="card-content">
+                            <h2><?php echo $row['fitemName']; ?></h2>
+                            <p>Category: <?php echo $row['category_name']; ?></p>
+                            <p>Found Date: <?php echo $row['FDate']; ?></p>
+                            <p>Found Location: <?php echo $row['fLocation']; ?></p>
+                            <p>Found Time: <?php echo $row['fTime']; ?></p>
+                            <span id="dots-<?php echo $id; ?>">...</span>
+                            <span id="more-<?php echo $id; ?>" style="display:none;">
+                                <p>Contact: <?php echo $row['Contact']; ?></p>
+                                <p>Description: <?php echo $row['fItemDescription']; ?></p>
+                                <a href="claim.php"><button class="btn">Claim</button></a>
+                            </span>
+                            <button onclick="myFunction(<?php echo $id; ?>)" id="myBtn-<?php echo $id; ?>" class="btn">More Details</button>
+                        </div>
                     </div>
-                </div>
             <?php
+                }
+            } else {
+                echo "<p style='text-align:center;'>No items found.</p>";
             }
-            // Free result set
-            mysqli_free_result($resulte);
             ?>
         </div>
     </div>
+
     <br>
+
     <!-- Pagination -->
     <div class="pagination" style="margin-top: 20px;">
         <?php if ($page > 1) { ?>
-            <a href="Foundpagecard.php?page=<?php echo $page - 1; ?>" class="btn">Previous</a>
+            <a href="Foundpagecard.php?page=<?php echo $page - 1; ?>&search=<?php echo $search_term; ?>" class="btn">Previous</a>
         <?php } else { ?>
             <span class="btn" style="cursor: not-allowed;">Previous</span>
         <?php } ?>
@@ -196,21 +197,21 @@ $total_pages = ceil($total_rows / $results_per_page);
             if ($i == $page) {
                 echo '<span class="btn active">' . $i . '</span>';
             } else {
-                echo '<a href="Foundpagecard.php?page=' . $i . '" class="btn">' . $i . '</a>';
+                echo '<a href="Foundpagecard.php?page=' . $i . '&search=' . $search_term . '" class="btn">' . $i . '</a>';
             }
         }
         ?>
 
         <?php if ($page < $total_pages) { ?>
-            <a href="Foundpagecard.php?page=<?php echo $page + 1; ?>" class="btn">Next</a>
+            <a href="Foundpagecard.php?page=<?php echo $page + 1; ?>&search=<?php echo $search_term; ?>" class="btn">Next</a>
         <?php } else { ?>
             <span class="btn" style="cursor: not-allowed;">Next</span>
         <?php } ?>
-    </div><br><br><br>
-    <?php
-    include 'footer.php';
-    ?>
+    </div>
+
+    <?php include 'footer.php'; ?>
 </body>
+
 <script>
     function myFunction(id) {
         var dots = document.getElementById("dots-" + id);
