@@ -1,8 +1,13 @@
+<?php
+include("php/config.php");
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style/style.css">
     <title>Contact</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -98,17 +103,39 @@
     </div>
     <div class="container">
         <div class="row">
+        <?php
+            if (isset($_POST['submit'])) {
+                $Name = $_POST['Name'];
+                $Email = $_POST['Email'];
+                $Message = $_POST['Message'];
+                  // Insert data into contactus table with the obtained categoryId
+                  $query = "INSERT INTO contactus (Name, Email, Message) VALUES (?, ?, ?)";
+                  $stmt = mysqli_prepare($con, $query);
+                  mysqli_stmt_bind_param($stmt, 'sss', $Name, $Email, $Message);
+                  $result = mysqli_stmt_execute($stmt);
+
+                  if ($result) {
+                      echo "<div class='message'>
+                          <p>Thanks For Message!</p>
+                      </div> <br>";
+                
+                  } else {
+                      echo "Error: " . mysqli_error($con);
+                  }
+              } 
+        
+        ?>
             <div class="column"> <img src="lost.jpg" style="width:100%">
             </div>
             <div class="column">
-                <form action="">
-                    <label for="fname">First Name</label>
-                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+            <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <label for="Name">Name</label>
+                    <input type="text" id="Name" name="Name" placeholder="Your name..">
                     <label for="Email">Email</label>
-                    <input type="text" id="Email" name="email" placeholder="Your last Email..">
-                    <label for="subject">Message</label>
-                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
-                    <input type="submit" value="Submit">
+                    <input type="text" id="Email" name="Email" placeholder="Your last Email..">
+                    <label for="Message">Message</label>
+                    <textarea id="Message" name="Message" placeholder="Write something.." style="height:170px"></textarea>
+                    <input type="submit" value="Submit" name="submit">
                 </form>
             </div>
         </div>
