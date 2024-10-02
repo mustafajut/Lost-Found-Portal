@@ -4,22 +4,40 @@ session_start();
 include("php/config.php");
 if (!isset($_SESSION['valid'])) {
     header("Location: index.php");
-  }
-  else
+    exit;
+}
+//   else
 // Define the number of results per page
 $results_per_page = 6;
 
 // Get the current page number from the URL, default is 1 if not set
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
+// Check if a search term is submitted
+$search_term = "";
+if (isset($_GET['search'])) {
+    $search_term = mysqli_real_escape_string($con, $_GET['search']);
+}
+
 // Calculate the offset for the SQL query
 $start_from = ($page - 1) * $results_per_page;
 
 // Fetch data from the database with limit and offset
-$resulte = mysqli_query($con, "SELECT * FROM reportlost LIMIT $start_from, $results_per_page");
+// $resulte = mysqli_query($con, "SELECT * FROM reportlost LIMIT $start_from, $results_per_page");
+
+// If search is submitted, filter the query
+if (!empty($search_term)) {
+    $query = "SELECT * FROM reportlost WHERE litemName LIKE '%$search_term%' LIMIT $start_from, $results_per_page";
+    $total_query = "SELECT COUNT(*) AS total FROM reportlost WHERE litemName LIKE '%$search_term%'";
+} else {
+    $query = "SELECT * FROM reportlost LIMIT $start_from, $results_per_page";
+    $total_query = "SELECT COUNT(*) AS total FROM reportlost";
+}
+// Fetch filtered data from the database
+$resulte = mysqli_query($con, $query);
 
 // Fetch the total number of records
-$total_results = mysqli_query($con, "SELECT COUNT(*) AS total FROM reportlost");
+$total_results = mysqli_query($con, $total_query);
 $total_rows = mysqli_fetch_assoc($total_results)['total'];
 
 // Calculate total pages
@@ -51,6 +69,7 @@ $total_pages = ceil($total_rows / $results_per_page);
 
         .card-container {
             display: grid;
+            margin-top: 1%;
             grid-template-columns: repeat(3, minmax(33%, 1fr));
             gap: 25px;
         }
@@ -148,37 +167,51 @@ $total_pages = ceil($total_rows / $results_per_page);
 <body>
     <?php require 'nav.php'; ?>
     <h3>Lost Items</h3>
-    <a href="Reportlost.php"><button class="btn" style="margin-top: 2%;">Report Lost Items</button></a>
+    <!-- Search form -->
+    <div style="margin-left:70%; margin-top: 0%">
+        <form method="GET" action="testlostcard.php" style="text-align:center; margin-bottom: 20px;">
+            <input type="text" name="search" value="<?php echo $search_term; ?>" placeholder="Search Items..." style="padding: 10px 35px; border: 1px solid #ddd; border-radius: 5px;">
+            <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
+    
+    <a href="Reportlost.php"><button class="btn" style="margin-top: 0%; margin-left: 5%">Report Lost Items</button></a>
+
     <div class="container">
 
         <div class="card-container">
             <?php
             // Loop through each row in the result set
-            while ($row = mysqli_fetch_assoc($resulte)) {
+            if (mysqli_num_rows($resulte) > 0) {
+                while ($row = mysqli_fetch_assoc($resulte)) {
 
-                $id = $row['litemId'];
+                    $id = $row['litemId'];
             ?>
-                <div class="card">
-                    <img src="<?php echo $row['itemimage']; ?>" alt="Item Image">
-                    <div class="card-content">
-                        <h2><?php echo $row['litemName']; ?></h2>
-                        <p>Category: <?php echo $row['category_name']; ?></p>
-                        <p>Lost Date: <?php echo $row['LostDate']; ?></p>
-                        <p>Lost Location: <?php echo $row['lLostLocation']; ?></p>
-                        <p>Lost Time: <?php echo $row['lLostTime']; ?></p>
-                        <span id="dots-<?php echo $id; ?>">...</span><span id="more-<?php echo $id; ?>" style="display:none;">
-                            <p>Contact: <?php echo $row['Contact']; ?></p>
-                            <p>Description: <?php echo $row['lItemDescription']; ?></p>
-                            <a href="claim.php"><button class="btn">Claim</button></a>
-                        </span>
-                        <button onclick="myFunction(<?php echo $id; ?>)" id="myBtn-<?php echo $id; ?>" class="btn">More Details</button>
+                    <div class="card">
+                        <img src="<?php echo $row['itemimage']; ?>" alt="Item Image">
+                        <div class="card-content">
+                            <h2><?php echo $row['litemName']; ?></h2>
+                            <p>Category: <?php echo $row['category_name']; ?></p>
+                            <p>Lost Date: <?php echo $row['LostDate']; ?></p>
+                            <p>Lost Location: <?php echo $row['lLostLocation']; ?></p>
+                            <p>Lost Time: <?php echo $row['lLostTime']; ?></p>
+                            <span id="dots-<?php echo $id; ?>">...</span><span id="more-<?php echo $id; ?>" style="display:none;">
+                                <p>Contact: <?php echo $row['Contact']; ?></p>
+                                <p>Description: <?php echo $row['lItemDescription']; ?></p>
+                                <a href="claim.php"><button class="btn">Claim</button></a>
+                            </span>
+                            <button onclick="myFunction(<?php echo $id; ?>)" id="myBtn-<?php echo $id; ?>" class="btn">More Details</button>
 
+                        </div>
                     </div>
-                </div>
             <?php
+                }
+            } else {
+                echo "<p style='text-align:center;'>No items found.</p>";
             }
             // Free result set
-            mysqli_free_result($resulte);
+            // mysqli_free_result($resulte);
+            // 
             ?>
         </div>
     </div>
@@ -186,7 +219,7 @@ $total_pages = ceil($total_rows / $results_per_page);
     <!-- Pagination -->
     <div class="pagination" style="margin-top: 20px;">
         <?php if ($page > 1) { ?>
-            <a href="testlostcard.php?page=<?php echo $page - 1; ?>" class="btn">Previous</a>
+            <a href="testlostcard.php?page=<?php echo $page - 1; ?> &search=<?php echo $search_term; ?>" class="btn">Previous</a>
         <?php } else { ?>
             <span class="btn" style="cursor: not-allowed;">Previous</span>
         <?php } ?>

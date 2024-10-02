@@ -63,6 +63,7 @@ $total_pages = ceil($total_rows / $results_per_page);
 
         .card-container {
             display: grid;
+            margin-top: 1%;
             grid-template-columns: repeat(3, minmax(33%, 1fr));
             gap: 25px;
         }
@@ -138,14 +139,17 @@ $total_pages = ceil($total_rows / $results_per_page);
 <body>
     <?php require 'nav.php'; ?>
     <h3>Found Items</h3>
+<!-- Search form -->
+ <div style="margin-left:70%; margin-top: 0%">
+        <form method="GET" action="Foundpagecard.php" style="text-align:center; margin-bottom: 20px;">
+            <input type="text" name="search" value="<?php echo $search_term; ?>" placeholder="Search Items..." style="padding: 10px 35px; border: 1px solid #ddd; border-radius: 5px;">
+            <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
 
-
-    <a href="Reportfound.php"><button class="btn" style="margin-top: 2%;">Report Found Items</button></a>   
-     <!-- Search form -->
-    <form method="GET" action="Foundpagecard.php" style="text-align:center; margin-bottom: 20px;">
-        <input type="text" name="search" value="<?php echo $search_term; ?>" placeholder="Search Items..." style="padding: 10px 35px; border: 1px solid #ddd; border-radius: 5px;">
-        <button type="submit" class="btn">Search</button>
-    </form>
+    <a href="Reportfound.php"><button class="btn" style="margin-top: 0%;">Report Found Items</button></a>
+    
+   
 
 
     <div class="container">
