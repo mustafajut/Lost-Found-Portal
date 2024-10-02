@@ -6,7 +6,7 @@
     <thead>
       <tr>
         <th class="text-center">S.N.</th>
-        <th class="text-center">Item Image</th>
+        <!-- <th class="text-center">Item Image</th> -->
         <th class="text-center">Item Name</th>
         <th class="text-center">Category</th>
         <th class="text-center">Found Date</th>
@@ -29,7 +29,7 @@
     ?>
     <tr>
       <td><?=$count?></td>
-      <td><img height='100px' src='<?=$row["fitemimage"]?>'></td>
+      <!-- <td><img height='100px' src='<?=$row["fitemimage"]?>'></td> -->
       <td><?=$row["fitemName"]?></td>
       <td><?=$row["category_name"]?></td>      
       <td><?=$row["FDate"]?></td> 
