@@ -147,7 +147,7 @@ $total_pages = ceil($total_rows / $results_per_page);
         </form>
     </div>
 
-    <a href="Reportfound.php"><button class="btn" style="margin-top: 0%;">Report Found Items</button></a>
+    <a href="Reportfound.php"><button class="btn" style="margin-top: 0%; margin-left:3%">Report Found Items</button></a>
     
    
 
